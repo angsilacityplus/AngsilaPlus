@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ข่าวสาร - ระบบสำนักงานเทศบาลเมืองอ่างศิลา (Ang Sila Town Municipality Office System)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="text-gray-800 flex flex-col min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-900 text-white px-4 py-3 shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+      <div class="flex items-center gap-3 w-full md:w-auto justify-center md:justify-start mb-4 md:mb-0">
+        <div
+          class="w-12 h-12 bg-white text-blue-900 rounded-full flex items-center justify-center font-bold text-xs shadow-sm">
+          <img src="https://lh3.googleusercontent.com/d/1RgfR0ilwzPCkBdMjjhStTM_xNR6mOEXY"
+            alt="ตราสัญลักษณ์เทศบาลเมืองอ่างศิลา"
+            style="width:100%; height:100%; object-fit:contain; border-radius:50%;">
+        </div>
+        <div class="leading-tight">
+          <h1 class="font-bold text-lg">สำนักงานเทศบาลเมืองอ่างศิลา</h1>
+          <p class="text-xs text-blue-200">Ang Sila Town Municipality Office System</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm font-medium">
+        <a href="index.html" class="hover:text-yellow-400 transition">หน้าหลัก</a>
+        <a href="department.html" class="hover:text-yellow-400 transition">ส่วนราชการ</a>
+        <a href="news.html" class="text-yellow-400 transition">ข่าวสาร</a>
+        <a href="contact.html" class="hover:text-yellow-400 transition">ติดต่อเรา</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- เนื้อหาหลัก -->
+  <main class="flex-grow container mx-auto px-4 py-10">
+
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-blue-900 mb-2">ข่าวสาร</h2>
+      <p class="text-gray-500">ข่าวประชาสัมพันธ์ กิจกรรม และประกาศต่าง ๆ ของเทศบาลเมืองอ่างศิลา</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-2 mb-8">
+      <button class="news-filter-btn bg-blue-900 text-white px-4 py-1.5 rounded-full text-sm font-medium transition"
+        data-category="all">ทั้งหมด</button>
+      <button
+        class="news-filter-btn bg-white text-gray-600 border border-gray-300 px-4 py-1.5 rounded-full text-sm font-medium transition"
+        data-category="ข่าวประชาสัมพันธ์">ข่าวประชาสัมพันธ์</button>
+      <button
+        class="news-filter-btn bg-white text-gray-600 border border-gray-300 px-4 py-1.5 rounded-full text-sm font-medium transition"
+        data-category="ข่าวกิจกรรม">ข่าวกิจกรรม</button>
+      <button
+        class="news-filter-btn bg-white text-gray-600 border border-gray-300 px-4 py-1.5 rounded-full text-sm font-medium transition"
+        data-category="ประกาศจัดซื้อจัดจ้าง">จัดซื้อจัดจ้าง</button>
+      <button
+        class="news-filter-btn bg-white text-gray-600 border border-gray-300 px-4 py-1.5 rounded-full text-sm font-medium transition"
+        data-category="ประกาศ">ประกาศ</button>
+    </div>
+
+    <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="news-card bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition flex flex-col"
+        data-category="ข่าวกิจกรรม">
+        <div class="h-36 bg-green-100 flex items-center justify-center text-green-700 text-4xl">
+          <i class="fa-solid fa-broom"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow">
+          <span
+            class="inline-block w-fit bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded mb-2">ข่าวกิจกรรม</span>
+          <h3 class="font-bold text-gray-800 mb-1 leading-snug">เทศบาลเมืองอ่างศิลาจัดกิจกรรม Big Cleaning Day
+            ทำความสะอาดชายหาด</h3>
+          <p class="text-sm text-gray-500 mb-3 flex-grow">
+            ระดมเจ้าหน้าที่และจิตอาสาร่วมทำความสะอาดพื้นที่ชายหาดและตลาดอ่างศิลา
+            เพื่อรักษาความสะอาดแหล่งท่องเที่ยวของชุมชน</p>
+          <div class="flex items-center justify-between text-xs text-gray-400 mt-auto">
+            <span>03 ก.ย. 2569</span>
+            <button onclick="showNewsDetail('n1')"
+              class="text-blue-700 font-semibold hover:underline">อ่านเพิ่มเติม</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition flex flex-col"
+        data-category="ข่าวประชาสัมพันธ์">
+        <div class="h-36 bg-blue-100 flex items-center justify-center text-blue-700 text-4xl">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow">
+          <span
+            class="inline-block w-fit bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded mb-2">ข่าวประชาสัมพันธ์</span>
+          <h3 class="font-bold text-gray-800 mb-1 leading-snug">โครงการพัฒนาชุมชนและสวัสดิการสังคม
+            สำหรับผู้สูงอายุในเขตเทศบาล</h3>
+          <p class="text-sm text-gray-500 mb-3 flex-grow">
+            เชิญชวนผู้สูงอายุในเขตเทศบาลลงทะเบียนเข้าร่วมกิจกรรมส่งเสริมสุขภาพและสวัสดิการประจำปี</p>
+          <div class="flex items-center justify-between text-xs text-gray-400 mt-auto">
+            <span>01 ก.ย. 2569</span>
+            <button onclick="showNewsDetail('n2')"
+              class="text-blue-700 font-semibold hover:underline">อ่านเพิ่มเติม</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition flex flex-col"
+        data-category="ประกาศจัดซื้อจัดจ้าง">
+        <div class="h-36 bg-purple-100 flex items-center justify-center text-purple-700 text-4xl">
+          <i class="fa-solid fa-file-contract"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow">
+          <span
+            class="inline-block w-fit bg-purple-100 text-purple-700 text-xs font-semibold px-2 py-1 rounded mb-2">ประกาศจัดซื้อจัดจ้าง</span>
+          <h3 class="font-bold text-gray-800 mb-1 leading-snug">ประกาศจัดซื้อจัดจ้าง ประจำเดือนกันยายน 2569
+            โครงการปรับปรุงถนนภายในเขตเทศบาล</h3>
+          <p class="text-sm text-gray-500 mb-3 flex-grow">
+            เทศบาลเมืองอ่างศิลาเปิดประกาศจัดซื้อจัดจ้างโครงการปรับปรุงผิวจราจรในพื้นที่ตำบลเสม็ด</p>
+          <div class="flex items-center justify-between text-xs text-gray-400 mt-auto">
+            <span>28 ส.ค. 2569</span>
+            <button onclick="showNewsDetail('n3')"
+              class="text-blue-700 font-semibold hover:underline">อ่านเพิ่มเติม</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition flex flex-col"
+        data-category="ประกาศ">
+        <div class="h-36 bg-yellow-100 flex items-center justify-center text-yellow-700 text-4xl">
+          <i class="fa-solid fa-bullhorn"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow">
+          <span
+            class="inline-block w-fit bg-yellow-100 text-yellow-700 text-xs font-semibold px-2 py-1 rounded mb-2">ประกาศ</span>
+          <h3 class="font-bold text-gray-800 mb-1 leading-snug">ประกาศรับสมัครบุคคลเพื่อสรรหาและเลือกสรรเป็นพนักงานจ้าง
+            ตำแหน่งเจ้าหน้าที่ธุรการ</h3>
+          <p class="text-sm text-gray-500 mb-3 flex-grow">
+            กองการเจ้าหน้าที่เปิดรับสมัครบุคคลเพื่อคัดเลือกเป็นพนักงานจ้างตามภารกิจ จำนวน 1 อัตรา</p>
+          <div class="flex items-center justify-between text-xs text-gray-400 mt-auto">
+            <span>25 ส.ค. 2569</span>
+            <button onclick="showNewsDetail('n4')"
+              class="text-blue-700 font-semibold hover:underline">อ่านเพิ่มเติม</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition flex flex-col"
+        data-category="ข่าวกิจกรรม">
+        <div class="h-36 bg-green-100 flex items-center justify-center text-green-700 text-4xl">
+          <i class="fa-solid fa-people-group"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow">
+          <span
+            class="inline-block w-fit bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded mb-2">ข่าวกิจกรรม</span>
+          <h3 class="font-bold text-gray-800 mb-1 leading-snug">เทศบาลจัดอบรมส่งเสริมอาชีพระยะสั้นให้กับประชาชนในพื้นที่
+          </h3>
+          <p class="text-sm text-gray-500 mb-3 flex-grow">
+            กองสวัสดิการสังคมจัดอบรมอาชีพเสริมรายได้ให้กับประชาชนที่สนใจในเขตเทศบาล ไม่มีค่าใช้จ่าย</p>
+          <div class="flex items-center justify-between text-xs text-gray-400 mt-auto">
+            <span>20 ส.ค. 2569</span>
+            <button onclick="showNewsDetail('n5')"
+              class="text-blue-700 font-semibold hover:underline">อ่านเพิ่มเติม</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="news-card bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition flex flex-col"
+        data-category="ข่าวประชาสัมพันธ์">
+        <div class="h-36 bg-blue-100 flex items-center justify-center text-blue-700 text-4xl">
+          <i class="fa-solid fa-faucet-drip"></i>
+        </div>
+        <div class="p-5 flex flex-col flex-grow">
+          <span
+            class="inline-block w-fit bg-blue-100 text-blue-700 text-xs font-semibold px-2 py-1 rounded mb-2">ข่าวประชาสัมพันธ์</span>
+          <h3 class="font-bold text-gray-800 mb-1 leading-snug">แจ้งปิดปรับปรุงระบบประปาชั่วคราว บริเวณซอยเทศบาล 3</h3>
+          <p class="text-sm text-gray-500 mb-3 flex-grow">แจ้งประชาชนในพื้นที่ซอยเทศบาล 3
+            เรื่องการปิดปรับปรุงระบบประปาชั่วคราวเพื่อซ่อมแซมท่อประปา</p>
+          <div class="flex items-center justify-between text-xs text-gray-400 mt-auto">
+            <span>15 ส.ค. 2569</span>
+            <button onclick="showNewsDetail('n6')"
+              class="text-blue-700 font-semibold hover:underline">อ่านเพิ่มเติม</button>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <p id="newsEmptyState" class="hidden text-center text-gray-400 py-10">ไม่มีข่าวในหมวดหมู่นี้</p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-auto">
+    <div class="container mx-auto f-grid">
+      <div>
+        <h4>เทศบาลเมืองอ่างศิลา</h4>
+        <p class="f-about">องค์กรปกครองส่วนท้องถิ่นที่มุ่งพัฒนาคุณภาพชีวิตประชาชน
+          ควบคู่การอนุรักษ์อัตลักษณ์ชุมชนชายทะเลอ่างศิลา ด้วยการบริหารที่โปร่งใสและมีส่วนร่วม</p>
+      </div>
+      <div>
+        <h4>ผู้พัฒนาระบบ</h4>
+        <ul>
+          <li>นายณภัทร ตีรกิตติพันธุ์</li>
+        </ul>
+      </div>
+      <div>
+        <h4>ติดต่อเรา</h4>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i> ที่ตั้ง : สำนักงานเทศบาลเมืองอ่างศิลา 90/338</li>
+          <li><i class="fa-solid fa-phone"></i> ม.3 ต.เสม็ด อ.เมือง จ.ชลบุรี 20000</li>
+          <li><i class="fa-solid fa-envelope"></i> ติดต่อ : 038-142-100-104</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2569 เทศบาลเมืองอ่างศิลา สงวนลิขสิทธิ์ | นโยบายคุ้มครองข้อมูลส่วนบุคคล (PDPA) | นโยบายคุกกี้
+    </div>
+  </footer>
+
+  <button id="top" aria-label="กลับขึ้นด้านบน"><i class="fa-solid fa-chevron-up"></i></button>
+
+  <script src="script.js"></script>
+  <script>
+    const NEWS_DATA = [
+      {
+        id: 'n1',
+        title: 'เทศบาลเมืองอ่างศิลาจัดกิจกรรม Big Cleaning Day ทำความสะอาดชายหาด',
+        date: '03 ก.ย. 2569',
+        category: 'ข่าวกิจกรรม',
+        body: 'เทศบาลเมืองอ่างศิลาระดมเจ้าหน้าที่ทุกกองงานร่วมกับจิตอาสาในพื้นที่ จัดกิจกรรม Big Cleaning Day ทำความสะอาดบริเวณชายหาดและตลาดอ่างศิลา เพื่อรักษาความสะอาดของแหล่งท่องเที่ยวและพื้นที่สาธารณะ พร้อมประชาสัมพันธ์ให้ประชาชนช่วยกันคัดแยกขยะก่อนทิ้ง'
+      },
+      {
+        id: 'n2',
+        title: 'โครงการพัฒนาชุมชนและสวัสดิการสังคม สำหรับผู้สูงอายุในเขตเทศบาล',
+        date: '01 ก.ย. 2569',
+        category: 'ข่าวประชาสัมพันธ์',
+        body: 'กองสวัสดิการสังคมขอเชิญชวนผู้สูงอายุที่มีภูมิลำเนาอยู่ในเขตเทศบาลเมืองอ่างศิลา ลงทะเบียนเข้าร่วมกิจกรรมส่งเสริมสุขภาพกายและใจประจำปี ผู้สนใจติดต่อสอบถามรายละเอียดเพิ่มเติมได้ที่กองสวัสดิการสังคม'
+      },
+      {
+        id: 'n3',
+        title: 'ประกาศจัดซื้อจัดจ้าง ประจำเดือนกันยายน 2569 โครงการปรับปรุงถนนภายในเขตเทศบาล',
+        date: '28 ส.ค. 2569',
+        category: 'ประกาศจัดซื้อจัดจ้าง',
+        body: 'เทศบาลเมืองอ่างศิลาเปิดประกาศจัดซื้อจัดจ้างโครงการปรับปรุงผิวจราจรถนนภายในเขตตำบลเสม็ด ผู้สนใจสามารถขอรับเอกสารและยื่นข้อเสนอได้ที่กองคลัง ในวันและเวลาราชการ'
+      },
+      {
+        id: 'n4',
+        title: 'ประกาศรับสมัครบุคคลเพื่อสรรหาและเลือกสรรเป็นพนักงานจ้าง ตำแหน่งเจ้าหน้าที่ธุรการ',
+        date: '25 ส.ค. 2569',
+        category: 'ประกาศ',
+        body: 'กองการเจ้าหน้าที่เปิดรับสมัครบุคคลเพื่อคัดเลือกเป็นพนักงานจ้างตามภารกิจ ตำแหน่งเจ้าหน้าที่ธุรการ จำนวน 1 อัตรา ผู้สนใจติดต่อขอรับใบสมัครและสอบถามคุณสมบัติเพิ่มเติมได้ที่กองการเจ้าหน้าที่'
+      },
+      {
+        id: 'n5',
+        title: 'เทศบาลจัดอบรมส่งเสริมอาชีพระยะสั้นให้กับประชาชนในพื้นที่',
+        date: '20 ส.ค. 2569',
+        category: 'ข่าวกิจกรรม',
+        body: 'กองสวัสดิการสังคมจัดอบรมส่งเสริมอาชีพระยะสั้นเพื่อสร้างรายได้เสริมให้กับประชาชนที่สนใจในเขตเทศบาล โดยไม่มีค่าใช้จ่ายในการเข้าร่วม'
+      },
+      {
+        id: 'n6',
+        title: 'แจ้งปิดปรับปรุงระบบประปาชั่วคราว บริเวณซอยเทศบาล 3',
+        date: '15 ส.ค. 2569',
+        category: 'ข่าวประชาสัมพันธ์',
+        body: 'เทศบาลเมืองอ่างศิลาขอแจ้งประชาชนในพื้นที่ซอยเทศบาล 3 เรื่องการปิดปรับปรุงระบบประปาชั่วคราวเพื่อซ่อมแซมท่อประปาที่ชำรุด ขออภัยในความไม่สะดวก'
+      }
+    ];
+  </script>
+</body>
+
+</html>

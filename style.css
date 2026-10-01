@@ -1,0 +1,139 @@
+/* กำหนดค่าสีหลักที่ใช้ในระบบ (อิงจากไฟล์ของคุณ) */
+:root {
+    --navy: #1e3a8a;
+    --blue2: #3b82f6;
+    --gold: #fbbf24;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: #f0f2f5;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+    background: #0a2a5e;
+    color: #c3d6f0;
+    padding: 52px 0 0;
+    font-size: .88rem;
+}
+
+.f-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1.8fr;
+    /* ปรับเหลือ 3 คอลัมน์ให้ตรงกับ HTML */
+    gap: 30px;
+    padding-bottom: 34px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* สำหรับจอเล็ก ปรับให้ Footer เรียงลงมา */
+@media (max-width: 768px) {
+    .f-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+footer h4 {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    position: relative;
+    margin-left: 0;
+    padding-bottom: 9px;
+}
+
+footer h4::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 38px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 3px;
+}
+
+.f-about {
+    font-family: 'Sarabun', sans-serif;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer li {
+    margin-bottom: 8px;
+}
+
+footer li a:hover {
+    color: var(--gold);
+    padding-left: 5px;
+    display: inline-block;
+    transition: .2s;
+}
+
+.social {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.social a {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .1);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    transition: .25s;
+}
+
+.social a:hover {
+    background: var(--gold);
+    color: var(--navy);
+    transform: translateY(-3px);
+}
+
+.copy {
+    border-top: 1px solid rgba(255, 255, 255, .12);
+    padding: 16px 0;
+    text-align: center;
+    font-size: .8rem;
+}
+
+/* ---------- BACK TO TOP ---------- */
+#top {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--blue2);
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    display: none;
+    /* ซ่อนเป็นค่าเริ่มต้น */
+    place-items: center;
+    box-shadow: var(--shadow);
+    z-index: 100;
+}
+
+#top.show {
+    display: grid;
+    /* โชว์เมื่อมีคลาส .show (ควบคุมโดย JS) */
+}
+
+#top:hover {
+    background: var(--navy);
+}
