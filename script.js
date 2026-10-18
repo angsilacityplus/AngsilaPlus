@@ -50,11 +50,14 @@ if (topBtn) {
 // =====================================================
 // ระบบเชื่อมต่อ Google Sheets สู่ Dashboard (แยกแท็บตามกอง)
 // =====================================================
-const SHEET_ID = '1Xk7ifeRnI1M8M3fXmBtStrBYU0G0tg6azvP8c6JU-uc'; 
+const SHEET_ID = '1Xk7ifeRnI1M8M3fXmBtStrBYU0G0tg6azvP8c6JU-uc';
 
-async function fetchDashboardByTab(tabName) {
+let currentSheetData = []; // เพิ่มตัวแปรเก็บข้อมูลชั่วคราว เพื่อไม่ต้องโหลดใหม่เมื่อเปลี่ยนปี
+
+async function fetchDashboardData() {
+  const tabName = document.getElementById('dept-select').value;
   const tableBody = document.getElementById('table-body');
-  if(!tableBody) return;
+  if (!tableBody) return;
 
   document.getElementById('dash-loading').classList.remove('hidden');
   tableBody.innerHTML = `<tr><td colspan="5" class="px-4 py-8 text-center text-gray-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i> กำลังโหลดข้อมูล...</td></tr>`;
@@ -64,13 +67,12 @@ async function fetchDashboardByTab(tabName) {
   try {
     const response = await fetch(url);
     const text = await response.text();
-    
+
     const jsonString = text.substring(text.indexOf('{'), text.lastIndexOf('}') + 1);
     const data = JSON.parse(jsonString);
 
     const cols = data.table.cols.map(c => c ? c.label : '');
-    
-    // ดึงข้อมูลแถวและแก้ปัญหาวันที่โชว์เป็น Date(ปี,เดือน,วัน) ให้เป็นค่ารูปแบบปกติ
+
     const rows = data.table.rows.map(r => {
       const rowObj = {};
       r.c.forEach((cell, i) => {
@@ -79,17 +81,37 @@ async function fetchDashboardByTab(tabName) {
       return rowObj;
     });
 
-    renderTable(rows);
+    currentSheetData = rows; // เก็บข้อมูลที่ดึงมาเข้าตัวแปร
+    filterData(); // โหลดเสร็จให้เรียกฟังก์ชันกรองข้อมูล
 
   } catch (error) {
     console.error('Error fetching sheet:', error);
     tableBody.innerHTML = `<tr><td colspan="5" class="px-4 py-5 text-center text-red-500 font-bold">ไม่พบข้อมูล หรือยังไม่ได้สร้างแท็บชื่อ "${tabName}"<br><span class="text-sm font-normal text-gray-500">กรุณาตรวจสอบชื่อแถบด้านล่างของ Google Sheet ให้ตรงกับค่าใน Dropdown</span></td></tr>`;
-    
-    // รีเซ็ตตัวเลขทั้งหมดเป็น 0 ถ้าไม่พบข้อมูล
+
     resetCounters();
   } finally {
     document.getElementById('dash-loading').classList.add('hidden');
   }
+}
+
+// ฟังก์ชันกรองข้อมูลตาม "ปีงบประมาณ"
+function filterData() {
+  const selectedYear = document.getElementById('year-select').value;
+
+  let filteredData = currentSheetData;
+
+  if (selectedYear !== 'all') {
+    filteredData = currentSheetData.filter(item => {
+      // ดึงปีงบประมาณจากคอลัมน์ "เลขที่" เช่น '02/2569'
+      const docNum = (item['เลขที่'] || '').toString();
+      return docNum.includes('/' + selectedYear);
+
+      // *หมายเหตุ: หากในอนาคตคุณสร้างคอลัมน์ชื่อ "ปีงบประมาณ" แยกออกมาในชีท
+      // สามารถเปลี่ยนไปใช้คำสั่ง: return item['ปีงบประมาณ'] == selectedYear; ได้เลย
+    });
+  }
+
+  renderTable(filteredData);
 }
 
 function resetCounters() {
@@ -116,16 +138,14 @@ function renderTable(dataArray) {
 
   dataArray.forEach(item => {
     const statusText = (item['สถานะ'] || '').toString().trim();
-    
-    // นับจำนวนตามสถานะใหม่ที่กำหนด
+
     if (statusText === 'รับเรื่อง') receivedCount++;
     else if (statusText === 'กำลังดำเนินการ') inProgressCount++;
     else if (statusText === 'เสร็จสิ้น') completedCount++;
     else if (statusText === 'ยกเลิก') canceledCount++;
 
     let statusBadge = '';
-    
-    // จับคู่สี Badge ให้ตรงกับกล่องด้านบนเป๊ะๆ
+
     if (statusText === 'รับเรื่อง') {
       statusBadge = `<span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-bold">${statusText}</span>`;
     } else if (statusText === 'กำลังดำเนินการ') {
@@ -150,7 +170,6 @@ function renderTable(dataArray) {
     tbody.appendChild(tr);
   });
 
-  // อัปเดตตัวเลขเข้าช่องด้านบน
   document.getElementById('val-received').innerText = receivedCount;
   document.getElementById('val-inprogress').innerText = inProgressCount;
   document.getElementById('val-completed').innerText = completedCount;
@@ -158,9 +177,9 @@ function renderTable(dataArray) {
   document.getElementById('val-total').innerText = dataArray.length;
 }
 
-// โหลดหน้า all เมื่อเปิดเว็บ
+// โหลดหน้า all เมื่อเปิดเว็บ (แก้ไขเป็นเรียกฟังก์ชันใหม่)
 document.addEventListener('DOMContentLoaded', () => {
-  fetchDashboardByTab('all');
+  fetchDashboardData();
 });
 
 // ---------- ส่วนราชการ: เปิดหัวข้อที่ตรงกับ URL hash อัตโนมัติ ----------

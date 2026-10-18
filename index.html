@@ -45,8 +45,7 @@
                 class="w-full md:w-1/4 bg-white p-4 rounded-xl shadow-sm border-t-4 border-blue-500 flex flex-col items-center justify-center text-center">
                 <div
                     class="w-32 h-40 bg-gray-200 rounded-lg mb-4 flex items-center justify-center text-gray-400 overflow-hidden shadow-inner">
-                    <img src="images/winaiimage.jpg"
-                        alt="ภาพนายก" width="400">
+                    <img src="images/winaiimage.jpg" alt="ภาพนายก" width="400">
                 </div>
                 <h3 class="font-bold text-lg text-blue-900">นายวินัย พ้นภัยพาล</h3>
                 <p class="text-sm text-gray-600 bg-blue-50 px-3 py-1 rounded-full mt-2">นายกเทศมนตรีเมืองอ่างศิลา</p>
@@ -94,8 +93,9 @@
                 </h2>
                 <p class="text-sm text-gray-600 mt-1">เลือกกองงานเพื่อดูข้อมูลและสถานะการดำเนินงานอัปเดตจากระบบ</p>
             </div>
-            <div class="w-full md:w-1/3 z-10">
-                <select onchange="fetchDashboardByTab(this.value)"
+            <div class="w-full md:w-1/2 z-10 flex flex-col md:flex-row gap-3">
+                <!-- Dropdown กองงาน (เพิ่ม id และเปลี่ยนฟังก์ชัน onchange) -->
+                <select id="dept-select" onchange="fetchDashboardData()"
                     class="w-full p-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:border-blue-500 font-medium text-gray-700 bg-white shadow-sm cursor-pointer">
                     <option value="all" selected>-- แสดงทุกกองงานรวมกัน --</option>
                     <option value="office">สำนักปลัดเทศบาล</option>
@@ -107,6 +107,15 @@
                     <option value="education">กองการศึกษา</option>
                     <option value="welfare">กองสวัสดิการสังคม</option>
                     <option value="pawnshop">สถานธนานุบาล</option>
+                </select>
+
+                <!-- Dropdown ปีงบประมาณ (เพิ่มใหม่) -->
+                <select id="year-select" onchange="filterData()"
+                    class="w-full p-3 border-2 border-blue-200 rounded-lg focus:outline-none focus:border-blue-500 font-medium text-gray-700 bg-white shadow-sm cursor-pointer">
+                    <option value="all" selected>-- ทุกปีงบประมาณ --</option>
+                    <option value="2569">ปีงบประมาณ 2570</option>
+                    <option value="2569">ปีงบประมาณ 2569</option>
+                    <!-- สามารถเพิ่มปีอื่นๆ ได้ตามต้องการ -->
                 </select>
             </div>
         </div>
